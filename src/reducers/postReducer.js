@@ -1,7 +1,7 @@
-export default function modal(state = {}, action) {
+export default function modal(state = [], action) {
   switch(action.type) {
     case "POST_LIST":
-      console.log(action)
+      //return [...state, {name: "test"}];
       return state;
     default:
       return state;

@@ -4,7 +4,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        This is app container
+        {this.props.children}
       </div>
     );
   }
