@@ -14,28 +14,19 @@ module.exports = {
     path: PATHS.build,
     filename: 'bundle.js'
   },
+  module: {
+    loaders: [{
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      loader: 'babel'
+    }]
+  },
   devServer: {
     contentBase: PATHS.build,
     historyApiFallback: true,
     hot: true,      
     inline: true,
     progress: true
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel'
-      },
-      {
-        test: /\.css$/,
-        loader: 'style!css'
-      },
-      { 
-        test: /\.(png|woff|woff2|eot|ttf|svg|jpg)$/, loader: 'url-loader?limit=1&name=images/[name].[ext]'
-      },
-    ]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
