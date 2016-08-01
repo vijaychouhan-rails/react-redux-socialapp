@@ -16,5 +16,16 @@
   "bugs": {
     "url": "https://github.com/vijaychouhan-rails/react-redux-socialapp/issues"
   },
-  "homepage": "https://github.com/vijaychouhan-rails/react-redux-socialapp#readme"
+  "homepage": "https://github.com/vijaychouhan-rails/react-redux-socialapp#readme",
+  "devDependencies": {
+    "babel-core": "^6.11.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-1": "^6.5.0",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "file-loader": "^0.9.0"
+  }
 }
