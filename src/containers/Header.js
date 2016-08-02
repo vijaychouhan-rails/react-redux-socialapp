@@ -1,20 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import * as Actions from '../actions';
+
 
 class Header extends React.Component {
 
   renderLinks() {
-    return [
-      <li className="nav-item" key={1}>
-        <Link className="nav-link" to="/posts">Posts</Link>
-      </li>,
-      <li className="nav-item" key={2}>
-        <Link className="nav-link" to="/following">Following</Link>
-      </li>,
-      <li className="nav-item" key={3}>
-        <Link className="nav-link" to="/followers">Followers</Link>
-      </li>
-    ]
+    if (this.props.auth.user && this.props.auth.user.isSignedIn) {
+      return [
+        <li className="nav-item" key={1}>
+          <Link className="nav-link" to="/posts">Posts</Link>
+        </li>,
+        <li className="nav-item" key={2}>
+          <Link className="nav-link" to="/following">Following</Link>
+        </li>,
+        <li className="nav-item" key={3}>
+          <Link className="nav-link" to="/followers">Followers</Link>
+        </li>
+      ]
+    }
+    else{
+       return [<li className="nav-item" key={4}>
+          <Link className="nav-link" to="/login">Login</Link>
+        </li>]
+    }
   }
 
   render() {
@@ -33,4 +43,12 @@ class Header extends React.Component {
   }
 }
 
-export default Header
+function mapStateToProps(state) {
+  console.log("Statye")
+  console.log(state)
+  return {
+    auth: state.auth
+  }
+}
+
+export default connect(mapStateToProps, Actions)(Header);
