@@ -19,7 +19,12 @@ module.exports = {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel'
-    }]
+    },
+    {
+        test: /\.css$/,
+        loader: 'style!css'
+      },
+    ]
   },
   devServer: {
     contentBase: PATHS.build,

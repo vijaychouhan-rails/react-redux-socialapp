@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import Home from './containers/Home';
-import Posts from './components/Posts';
+import Posts from './containers/Posts';
 import Followers from './components/Followers';
 import Following from './components/Following';
 import { Provider } from 'react-redux';
