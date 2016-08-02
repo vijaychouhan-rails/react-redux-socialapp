@@ -7,7 +7,8 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        This is home containers
+        Post elements count:: {this.props.posts.length} <br/>
+        <span onClick = {() => this.props.actions.fetchPosts()}>Click here to Load Posts </span>
       </div>
     );
   }
