@@ -7,7 +7,7 @@ import * as Actions from '../actions';
 class Header extends React.Component {
 
   renderLinks() {
-    if (this.props.auth.user && this.props.auth.user.isSignedIn) {
+    if (this.props.signedIn) {
       return [
         <li className="nav-item" key={1}>
           <Link className="nav-link" to="/posts">Posts</Link>
@@ -43,12 +43,8 @@ class Header extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  console.log("Statye")
-  console.log(state)
-  return {
-    auth: state.auth
-  }
-}
 
-export default connect(mapStateToProps, Actions)(Header);
+export default connect(({ auth }) => ({
+  signedIn: auth.getIn(['user', 'isSignedIn']),
+  currentEndpointKey: auth.getIn(['configure', 'currentEndpointKey']),
+}))(Header);

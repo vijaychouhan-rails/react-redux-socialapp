@@ -31,6 +31,17 @@ store.dispatch(configure(
   // app to the DOM. see the demo app for a more complete example.
 });
 
+
+function requireAuth(store, nextState, replace, next) {
+  console.log('next');
+  console.log(next);
+  if (!store.getState().auth.getIn(['user', 'isSignedIn'])) {
+    replace('/login');
+  }
+  next();
+}
+
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -39,9 +50,8 @@ ReactDOM.render(
         <Route path="posts" component={PostGrid} />
         <Route path="posts/:id" component={PostDetails} />
         <Route path="following" component={Following} />
-        <Route path="followers" component={Followers} />
+        <Route path="followers" component={Followers} onEnter={requireAuth.bind(this, store)} />
         <Route path="login" component={EmailSignInForm} />
-
       </Route>
     </Router>
   </Provider>,
