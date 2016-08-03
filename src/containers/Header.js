@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import * as Actions from '../actions';
-
+import { SignOutButton } from "redux-auth/bootstrap-theme";
+import { browserHistory } from 'react-router';
 
 class Header extends React.Component {
 
@@ -17,6 +18,9 @@ class Header extends React.Component {
         </li>,
         <li className="nav-item" key={3}>
           <Link className="nav-link" to="/followers">Followers</Link>
+        </li>,
+        <li>
+          <SignOutButton next={() => browserHistory.push('/')} />
         </li>
       ]
     }

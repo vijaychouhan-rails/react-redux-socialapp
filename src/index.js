@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import Home from './containers/Home';
 import PostGrid from './containers/PostGrid';
+import SignIn from './containers/SignIn';
 import Followers from './components/Followers';
 import Following from './components/Following';
 import PostDetails from './components/PostDetails';
@@ -12,7 +13,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import { EmailSignUpForm } from "redux-auth/bootstrap-theme";
 import { EmailSignInForm } from "redux-auth/bootstrap-theme";
-import { SignOutButton } from "redux-auth/bootstrap-theme";
+
 import { RequestPasswordResetForm } from "redux-auth/bootstrap-theme";
 import { UpdatePasswordForm } from "redux-auth/bootstrap-theme";
 
@@ -33,8 +34,6 @@ store.dispatch(configure(
 
 
 function requireAuth(store, nextState, replace, next) {
-  console.log('next');
-  console.log(next);
   if (!store.getState().auth.getIn(['user', 'isSignedIn'])) {
     replace('/login');
   }
@@ -51,7 +50,7 @@ ReactDOM.render(
         <Route path="posts/:id" component={PostDetails} />
         <Route path="following" component={Following} />
         <Route path="followers" component={Followers} onEnter={requireAuth.bind(this, store)} />
-        <Route path="login" component={EmailSignInForm} />
+        <Route path="login" component={SignIn} />
       </Route>
     </Router>
   </Provider>,
