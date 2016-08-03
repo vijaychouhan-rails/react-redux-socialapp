@@ -8,9 +8,8 @@ class SignIn extends React.Component {
   render() {
     return (
       <div>
-        <PageHeader>Sign In First</PageHeader>
-        <p>Unauthenticated users can't access the account page.</p>
-        <EmailSignInForm next={() => browserHistory.push('/followers')} />
+        <PageHeader>Sign In</PageHeader>
+        <EmailSignInForm next={() => browserHistory.push('/')} />
       </div>
     );
   }

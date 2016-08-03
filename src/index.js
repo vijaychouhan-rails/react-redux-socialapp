@@ -45,10 +45,10 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={Home} />
-        <Route path="posts" component={PostGrid} />
-        <Route path="posts/:id" component={PostDetails} />
-        <Route path="following" component={Following} />
+        <IndexRoute component={Home} onEnter={requireAuth.bind(this, store)} />
+        <Route path="posts" component={PostGrid}  onEnter={requireAuth.bind(this, store)}/>
+        <Route path="posts/:id" component={PostDetails} onEnter={requireAuth.bind(this, store)} />
+        <Route path="following" component={Following} onEnter={requireAuth.bind(this, store)} />
         <Route path="followers" component={Followers} onEnter={requireAuth.bind(this, store)} />
         <Route path="login" component={SignIn} />
       </Route>
