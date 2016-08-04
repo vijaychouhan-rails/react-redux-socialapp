@@ -20,8 +20,12 @@ import { UpdatePasswordForm } from "redux-auth/bootstrap-theme";
 import { configure } from "redux-auth";
 import { fetch } from "redux-auth";
 
+import {requireAuthentication} from './containers/AuthenticatedComponent';
+import { syncHistoryWithStore } from 'react-router-redux'
 
 const store = configureStore();
+
+const history = syncHistoryWithStore(browserHistory, store)
 
 // client-side usage
 store.dispatch(configure(
@@ -33,23 +37,23 @@ store.dispatch(configure(
 });
 
 
-function requireAuth(store, nextState, replace, next) {
-  if (!store.getState().auth.getIn(['user', 'isSignedIn'])) {
-    replace('/login');
-  }
-  next();
-}
+// function requireAuth(store, nextState, replace, next) {
+//   if (!store.getState().auth.getIn(['user', 'isSignedIn'])) {
+//     replace('/login');
+//   }
+//   next();
+// }
 
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={history}>
       <Route path="/" component={App}>
-        <IndexRoute component={Home} onEnter={requireAuth.bind(this, store)} />
-        <Route path="posts" component={PostGrid}  onEnter={requireAuth.bind(this, store)}/>
-        <Route path="posts/:id" component={PostDetails} onEnter={requireAuth.bind(this, store)} />
-        <Route path="following" component={Following} onEnter={requireAuth.bind(this, store)} />
-        <Route path="followers" component={Followers} onEnter={requireAuth.bind(this, store)} />
+        <IndexRoute component={requireAuthentication(Home)} />
+        <Route path="posts" component={requireAuthentication(PostGrid)}/>
+        <Route path="posts/:id" component={requireAuthentication(PostDetails)} />
+        <Route path="following" component={requireAuthentication(Following)} />
+        <Route path="followers" component={requireAuthentication(Followers)} />
         <Route path="login" component={SignIn} />
       </Route>
     </Router>
