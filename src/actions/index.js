@@ -1,7 +1,9 @@
+import { fetch } from 'redux-auth';
+
 export function fetchPosts() {
   return function(dispatch){
     const url = "http://localhost:3000/posts";
-    fetch(url)
+    fetch(url, {credentials: 'include'})
       .then(function(response){
         return(response.json());
       })
