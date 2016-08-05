@@ -7,14 +7,24 @@ const PATHS = {
 };
 
 module.exports = {
-  entry: {
-    src: PATHS.src
-  },
+  devtool: 'source-map',
+  entry: [
+//    'webpack-hot-middleware/client',
+    './src/index'
+  ],
   output: {
-    path: PATHS.build,
-    filename: 'bundle.js'
+    path: path.join(__dirname, 'build'),
+    filename: 'bundle.js',
+    publicPath: '/static/'
   },
   module: {
+    preLoaders: [
+        {
+          test: /\.js$/, // include .js files 
+          exclude: /node_modules/, // exclude any and all files in the node_modules folder 
+          loader: "jshint-loader"
+        }
+    ],
     loaders: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
@@ -34,6 +44,7 @@ module.exports = {
     progress: true
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
   ]
 };
