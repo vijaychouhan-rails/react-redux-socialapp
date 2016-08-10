@@ -1,27 +1,35 @@
-var path = require('path');
-var express = require('express');
-var webpack = require('webpack');
-var config = require('./webpack.config');
+require('babel-core/register')({
+  presets: ['es2015', 'react'],
+});
 
-var app = express();
-var compiler = webpack(config);
+var webpack = require('webpack')
+var webpackDevMiddleware = require('webpack-dev-middleware')
+var webpackHotMiddleware = require('webpack-hot-middleware')
+var config = require('./webpack.config')
+var path = require('path')
+var Express = require('express')
+var requestHandler = require('./requestHandler')
 
-app.use(require('webpack-dev-middleware')(compiler, {
+var qs = require("query-string")
+
+var app = new Express()
+var port = 7770
+
+var compiler = webpack(config)
+app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
-  publicPath: config.output.publicPath
-}));
+  publicPath: config.output.publicPath,
+  historyApiFallback: true
+}))
+app.use(webpackHotMiddleware(compiler))
+delete process.env.BROWSER;
 
-app.use(require('webpack-hot-middleware')(compiler));
+app.use(requestHandler);
 
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
-app.listen(7770, 'localhost', function(err) {
-  if (err) {
-    console.log(err);
-    return;
+app.listen(port, function (error) {
+  if (error) {
+    console.error(error)
+  } else {
+    console.info('==> Listening on port %s. Open up http://localhost:%s/ in your browser.', port, port)
   }
-
-  console.log('Listening at http://localhost:7770');
-});
+})

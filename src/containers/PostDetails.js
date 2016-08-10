@@ -4,7 +4,7 @@ export default class PostDetails extends React.Component {
   render() {
     return (
       <div>
-        This is post details page
+        11111This is post details page
       </div>
     );
   }

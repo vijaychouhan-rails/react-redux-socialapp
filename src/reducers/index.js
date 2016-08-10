@@ -5,8 +5,7 @@ import { routerReducer } from 'react-router-redux'
 
 const rootReducer = combineReducers({
   routing: routerReducer,
-  posts: PostReducer,
-  auth: authStateReducer
+  posts: PostReducer
 });
 
 export default rootReducer;
