@@ -41,7 +41,7 @@ request
             <Provider store={store}>
               <RouterContext {...routeContext} />
             </Provider>)
-          res.status(200).send(renderFullPage(html,initialState1))
+          res.status(200).send(renderFullPage(html,initialState))
         } else {
           res.status(404).send('Not found')
         }
