@@ -2,9 +2,10 @@ import React from 'react'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { renderToString } from 'react-dom/server'
-import rootReducer from './src/reducers';
+import rootReducer from './src/reducers/index';
 import { match, RouterContext } from 'react-router'
 import routes from './src/routes'
+//import Immutable from "immutable";
 
 var request = require('request')
 
@@ -15,17 +16,13 @@ request
         console.log("===============error=====================")
         throw err;
       }
-      console.log("===============working=================")
       var defaultState = JSON.parse(body)
-      console.log("defaultState")
-      console.log(defaultState)
-    //  Step 1: Create a Redux store
+
       const store = createStore(rootReducer, defaultState)
 
     // Step 2: Get initial state
-      const initialState = store.getState()
-      console.log("initialState")
-      console.log(initialState)
+      const initialState = store.getState();
+
     // Step 8: Define routes on the server
       const routesMap = {
         routes,
@@ -44,7 +41,7 @@ request
             <Provider store={store}>
               <RouterContext {...routeContext} />
             </Provider>)
-          res.status(200).send(renderFullPage(html,initialState))
+          res.status(200).send(renderFullPage(html,initialState1))
         } else {
           res.status(404).send('Not found')
         }
