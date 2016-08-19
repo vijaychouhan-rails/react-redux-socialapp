@@ -8,9 +8,9 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
+        <AuthGlobals />
         <Header />
         <div className='container'>
-          <AuthGlobals />
           {this.props.children}
         </div>
       </div>

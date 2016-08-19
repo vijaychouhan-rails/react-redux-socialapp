@@ -8,12 +8,13 @@ import SignIn from './containers/SignIn';
 import Followers from './components/Followers';
 import Following from './components/Following';
 import PostDetails from './containers/PostDetails';
+import {requireAuthentication} from './containers/AuthenticatedComponent';
 
   const routes = (
       <Router history={browserHistory}>
         <Route path="/" component={App}>
           <IndexRoute component={(Home)} />
-          <Route path="posts" component={(PostGrid)}/>
+          <Route path="posts" component={requireAuthentication(PostGrid)}/>
           <Route path="posts/:id" component={(PostDetails)} />
           <Route path="following" component={(Following)} />
           <Route path="followers" component={(Followers)} />

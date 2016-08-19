@@ -48,9 +48,7 @@ class Header extends React.Component {
 }
 
 
-// export default connect(({ auth }) => ({
-//   signedIn: auth.getIn(['user', 'isSignedIn']),
-//   currentEndpointKey: auth.getIn(['configure', 'currentEndpointKey']),
-// }))(Header);
-
-export default Header
+export default connect(({ auth }) => ({
+  signedIn: auth.getIn(['user', 'isSignedIn']),
+  currentEndpointKey: auth.getIn(['configure', 'currentEndpointKey']),
+}))(Header);
