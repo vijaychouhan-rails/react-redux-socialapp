@@ -11,6 +11,7 @@ var Express = require('express')
 var requestHandler = require('./requestHandler')
 
 var qs = require("query-string")
+var cookieParser = require('cookie-parser')
 
 var app = new Express()
 var port = 7770
@@ -21,8 +22,11 @@ app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath,
   historyApiFallback: true
 }))
+
+app.use(cookieParser())
+
 app.use(webpackHotMiddleware(compiler))
-delete process.env.BROWSER;
+//delete process.env.BROWSER;
 
 app.use(requestHandler);
 

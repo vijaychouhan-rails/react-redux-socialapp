@@ -27,7 +27,11 @@ class Header extends React.Component {
     else{
        return [<li className="nav-item" key={4}>
           <Link className="nav-link" to="/login">Login</Link>
-        </li>]
+        </li>,
+        <li className="nav-item" key={5}>
+          <Link className="nav-link" to="/posts">Posts</Link>
+        </li>
+        ]
     }
   }
 
@@ -48,9 +52,7 @@ class Header extends React.Component {
 }
 
 
-// export default connect(({ auth }) => ({
-//   signedIn: auth.getIn(['user', 'isSignedIn']),
-//   currentEndpointKey: auth.getIn(['configure', 'currentEndpointKey']),
-// }))(Header);
-
-export default Header
+export default connect(({ auth }) => ({
+  signedIn: auth.getIn(['user', 'isSignedIn']),
+  currentEndpointKey: auth.getIn(['configure', 'currentEndpointKey']),
+}))(Header);
