@@ -6,10 +6,8 @@ import Post from '../components/Post'
 
 class PostGrid extends React.Component {
   componentWillMount() {
-    if(this.props.posts.length == 0){
       console.log("componentDidMount")
-      //this.props.actions.fetchPosts()
-    }
+//      this.props.actions.fetchPosts()
   }
 
   render() {
