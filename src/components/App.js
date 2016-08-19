@@ -2,7 +2,9 @@ import React from 'react';
 import Header from '../containers/Header'
 import { AuthGlobals } from "redux-auth/bootstrap-theme";
 
-//import '../styles/custom.css';
+if (process.env.BROWSER) {
+  require('../styles/custom.css')
+}
 
 export default class App extends React.Component {
   render() {

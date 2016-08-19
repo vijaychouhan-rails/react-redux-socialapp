@@ -26,7 +26,10 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(cookieParser())
 
 app.use(webpackHotMiddleware(compiler))
-//delete process.env.BROWSER;
+
+//delete browser 
+//Solving the issue http://stackoverflow.com/questions/30347722/importing-css-files-in-isomorphic-react-components
+delete process.env.BROWSER;
 
 app.use(requestHandler);
 
