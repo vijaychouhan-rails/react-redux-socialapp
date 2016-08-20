@@ -23,6 +23,7 @@ app.use(webpackDevMiddleware(compiler, {
   historyApiFallback: true
 }))
 
+
 app.use(cookieParser())
 
 app.use(webpackHotMiddleware(compiler))

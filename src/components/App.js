@@ -2,18 +2,21 @@ import React from 'react';
 import Header from '../containers/Header'
 import { AuthGlobals } from "redux-auth/bootstrap-theme";
 
-if (process.env.BROWSER) {
+if (typeof window != 'undefined' && window.document) {
   require('../styles/custom.css')
 }
 
 export default class App extends React.Component {
   render() {
+    console.log("====================================================")
+    console.log((typeof window != 'undefined' && window.document))
+    console.log("END END END====================================================")
     return (
       <div>
         <AuthGlobals />
         <Header />
         <div className='container'>
-          {this.props.children}
+          {(typeof window != 'undefined' && window.document) ? this.props.children : 'Loading...' }
         </div>
       </div>
     );

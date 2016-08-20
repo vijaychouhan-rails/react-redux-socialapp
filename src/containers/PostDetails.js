@@ -1,64 +1,50 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import CommentList from '../components/CommentList'
 
 export default class PostDetails extends React.Component {
   render() {
+    const {id} = this.props.params;
+    const post = (this.props.posts.filter((post) => (post.id.toString() === id)))[0]
+
+    console.log("post data load")
+    console.log(post)
+    console.log("End post data load")
     return (
-      <div>
-        11111This is post details page
+      <div className='col-md-12'>
+        <div className='col-md-8 post-show-container'>
+          <div className='col-md-12'>
+            <div className='col-md-12'>
+              <h2>{post.title}</h2>
+            </div>
+
+            <div className='col-md-12'>
+              <div className='col-md-6'>
+                <img src={post.display_src} height='300' width='300' />
+              </div>
+              <div className='col-md-6'>
+                <span>{post.description}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className='col-md-4'>
+          <h4>Comments</h4>
+          {post.comments.map(function(comment, index){
+            return <CommentList key={index} comment={comment}/>
+          }, this)}
+        </div>
       </div>
     );
   }
 }
 
 
-// import React from 'react';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-// import * as Actions from '../actions';
+function mapStateToProps(state) {
+  return {
+    posts: state.posts
+  };
+}
 
-// class PostDetails extends React.Component {
-//   componentWillMount() {
-//     console.log("componentWillMount")
-//     console.log(this.props.params.id)
-//     if(this.props.posts.length == 0){
-//       console.log("componentDidMount")
-//       this.props.actions.fetchPosts()
-//     }
-//   }
-
-
-//   render() {
-//     // console.log("this.props.")
-//     // console.log(this.props.posts)
-//     // const { id } = this.props.params;
-
-//     //const i = this.props.posts.filter((post) => post.id === id);
-//     //alert(i)
-//     //alert(this.props.post)
-//     return (
-//       <div>
-//         THis is single post data: 
-//       </div>
-//     );
-//   }
-// }
-
-
-
-// // function mapStateToProps(state) {
-// //   //http://redux.js.org/docs/recipes/ServerRendering.html
-// //   console.log("================+State===============")
-// //   console.log(state)
-// //   return {
-// //     posts: state.posts,
-// //     post: '111111'
-// //   };
-// // }
-
-// // function mapDispatchToProps(dispatch) {
-// //   return {
-// //     actions: bindActionCreators(Actions, dispatch)
-// //   };
-// // }
-
-// // export default connect(mapStateToProps, mapDispatchToProps)(PostDetails);
+export default connect(mapStateToProps)(PostDetails);

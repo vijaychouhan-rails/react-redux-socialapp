@@ -15,7 +15,7 @@ import {requireAuthentication} from './containers/AuthenticatedComponent';
         <Route path="/" component={App}>
           <IndexRoute component={(Home)} />
           <Route path="posts" component={requireAuthentication(PostGrid)}/>
-          <Route path="posts/:id" component={(PostDetails)} />
+          <Route path="posts/:id" component={requireAuthentication(PostDetails)} />
           <Route path="following" component={(Following)} />
           <Route path="followers" component={(Followers)} />
           <Route path="login" component={SignIn} />

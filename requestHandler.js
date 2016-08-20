@@ -14,10 +14,8 @@ import { configure } from "redux-auth";
 import qs from "query-string";
 
 function handleRender(req,res) {
+  
   const cookies = req.headers.cookie;
-  console.log("=================cookies================")
-  console.log(cookies)
-  console.log("End =================cookies================")
   var query = qs.stringify(req.query);
   const currentLocation = req.path + (query.length ? "?" + query : "");
 
@@ -46,7 +44,6 @@ function handleRender(req,res) {
 
           fetch("http://localhost:3000/posts", {credentials: 'include'})
             .then(function(response){
-              console.log("========================Server respon===================")
               return(response.json());
             })
             .then(function(data){
