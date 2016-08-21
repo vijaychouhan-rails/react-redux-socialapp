@@ -4,6 +4,7 @@ import {reduxForm} from 'redux-form';
 import * as Actions from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {reset} from 'redux-form';
 
 class CommentForm extends Component {
 

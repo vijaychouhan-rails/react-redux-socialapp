@@ -1,4 +1,5 @@
 import { fetch } from 'redux-auth';
+import {reset} from 'redux-form';
 
 export function fetchPosts() {
   return function(dispatch){
@@ -39,6 +40,8 @@ export function submitComment(data) {
           type: 'ADD_COMMENT',
           comment: data
         })
+
+        dispatch(reset('comment'));
       })
       .catch(function(error){
         console.log("Opps...", "Could not fetch in fetchPosts " + error);
