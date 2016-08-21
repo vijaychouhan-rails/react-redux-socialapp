@@ -19,3 +19,29 @@ export function fetchPosts() {
       })
   }
 }
+
+export function submitComment(data) {
+  return function(dispatch){
+    const url = "http://localhost:3000/comments";
+    fetch(url, {credentials: 'include', method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(function(response){
+        return(response.json());
+      })
+      .then(function(data){
+        
+        dispatch({
+          type: 'ADD_COMMENT',
+          comment: data
+        })
+      })
+      .catch(function(error){
+        console.log("Opps...", "Could not fetch in fetchPosts " + error);
+      })
+  }
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CommentList from '../components/CommentList'
+import CommentForm from '../components/CommentForm'
 
 export default class PostDetails extends React.Component {
   render() {
@@ -34,6 +35,8 @@ export default class PostDetails extends React.Component {
           {post.comments.map(function(comment, index){
             return <CommentList key={index} comment={comment}/>
           }, this)}
+         {/* initialValues for redux-form */}
+          <CommentForm initialValues={{'post_id': post.id}} />
         </div>
       </div>
     );

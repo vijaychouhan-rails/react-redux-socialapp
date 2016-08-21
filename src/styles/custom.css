@@ -14,3 +14,8 @@ body{
 .comment-show{
   border: 4px solid #DED7D4;   
 }
+
+.comment-field{
+  height: 70px;
+  width: 350px;
+}
