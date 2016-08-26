@@ -39,6 +39,12 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    //global variable plugins
+    new webpack.DefinePlugin({
+      API_URL: JSON.stringify("http://localhost:3000")
+    })
   ]
 };
+
+

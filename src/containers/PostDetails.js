@@ -21,7 +21,7 @@ export default class PostDetails extends React.Component {
 
             <div className='col-md-12'>
               <div className='col-md-6'>
-                <img src={post.display_src} height='300' width='300' />
+                <img src={`${API_URL}${post.avatar_url}`} height='300' width='300' />
               </div>
               <div className='col-md-6'>
                 <span>{post.description}</span>

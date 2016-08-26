@@ -14,7 +14,7 @@ class PostGrid extends React.Component {
   render() {
     return (
       <div>
-        <Link className="nav-link" to="/posts/new">New Post</Link>
+        <div><Link className="nav-link btn btn-primary" to="/posts/new">New Post</Link></div>
         {this.props.posts.map(function(post, index){
           return <Post key={index} post={post}/>
         }, this)}

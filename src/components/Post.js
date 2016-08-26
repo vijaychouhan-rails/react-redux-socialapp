@@ -6,7 +6,7 @@ class Post extends React.Component {
     return (
       <div className='col-md-4 post-block'>
         <Link className="nav-link" to={`/posts/${this.props.post.id}`}>
-          <img src={this.props.post.display_src} height='300' width='300' />
+          <img src={`${API_URL}${this.props.post.avatar_url}`} height='300' width='300' />
         </Link>
         <p>
           <span> 1 Likes </span> 
