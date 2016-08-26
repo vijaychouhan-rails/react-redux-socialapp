@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../actions';
 import Post from '../components/Post'
+import { Link } from 'react-router';
 
 class PostGrid extends React.Component {
   componentWillMount() {
@@ -13,6 +14,7 @@ class PostGrid extends React.Component {
   render() {
     return (
       <div>
+        <Link className="nav-link" to="/posts/new">New Post</Link>
         {this.props.posts.map(function(post, index){
           return <Post key={index} post={post}/>
         }, this)}

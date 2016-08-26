@@ -19,6 +19,10 @@ export default function postReducer(state = [], action) {
         return post
       })
 
+    case 'ADD_POST':
+      var new_state = Object.assign([], state)
+      new_state.push(action.post)
+      return new_state
     default:
       return state;
   }

@@ -6,3 +6,14 @@ https://gist.github.com/insin/bbf116e8ea10ef38447b
 
 //For Document
 http://redux-form.com/5.3.1/#/examples/submit-from-parent?_k=yqezzw
+
+https://github.com/lemonCMS/react-plupload
+
+https://www.startuprocket.com/articles/rails5-actioncable-redux-and-react-walking-through-an-example-chat-application
+
+https://github.com/BBB/dropzone-redux-form-example/blob/master/src/App.js
+
+
+==============
+
+<input type="file" className="form-control" {...avatar} value={null} onChange={this.handleFile.bind(this, 'avatar')} />

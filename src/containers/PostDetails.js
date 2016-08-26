@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CommentList from '../components/CommentList'
-import CommentForm from '../components/CommentForm'
+import CommentForm from './CommentForm'
 
 export default class PostDetails extends React.Component {
   render() {
