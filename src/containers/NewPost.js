@@ -14,7 +14,7 @@ class NewPostForm extends Component {
     super(props)
     // Pro tip: The best place to bind your member functions is in the component constructor
     this.handleSubmit = this.handleSubmit.bind(this)
-//    this.handleFile = this.handleFile.bind(this)
+    this.onOpenClick = this.onOpenClick.bind(this)
   }
 
   handleSubmit(data) {
@@ -30,12 +30,16 @@ class NewPostForm extends Component {
   //   const files = [...event.target.files]
   //   fields[fieldName].onChange(files)
   // }
+  onOpenClick() {
+      this.refs.dropzone.open();
+    }
 
   render() {
-    const {fields: {title, description, avatar}, handleSubmit, handleFile, submitting} = this.props;
+    const {fields: {title, description, avatar}, handleSubmit, handleFile, onOpenClick,  submitting} = this.props;
 
     
     return (
+      
       <form onSubmit={handleSubmit(this.handleSubmit)}>
         <h2> New Post </h2>
         <div className="form-group">
@@ -51,22 +55,25 @@ class NewPostForm extends Component {
               value={description.value || ''} className="form-control" />
         </div>
         
-        <div>
-          <Dropzone
+        <div className="col-md-4">
+          <Dropzone ref="dropzone"
             onDrop={ ( filesToUpload, e ) => avatar.onChange(filesToUpload)} multiple={false}
           >
-            <div>Try dropping some files here, or click to select files to upload.</div>
           </Dropzone>
+        </div>
+        
+        <div className='col-md-5' onClick={this.onOpenClick.bind(this)}>Try dropping some files here, or click to select files to upload.
           { avatar && Array.isArray(avatar.value) && (
-            <ul>
-              { avatar.value.map((file, i) => <img src={file.preview} />) }
-            </ul>
+            <div>
+              { avatar.value.map((file, i) => <img src={file.preview} height='200px'/>) }
+            </div>
           ) }
         </div>
-
-        <button type="submit" disabled={submitting} className="btn btn-primary">
-          {submitting ? <i/> : <i/>} Submit
-        </button>
+        <div className='row'>
+          <button type="submit" disabled={submitting} className="btn btn-primary">
+            {submitting ? <i/> : <i/>} Submit
+          </button>
+        </div>
       </form>
     );
   }
