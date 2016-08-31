@@ -10,7 +10,7 @@ class Post extends React.Component {
         </Link>
         <p>
           <span> 1 Likes </span> 
-          <span> 10 Comments </span>
+          <span> {this.props.post.comments.length} Comments </span>
         </p>
       </div>
     );
