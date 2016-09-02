@@ -9,6 +9,9 @@ export default function postReducer(state = [], action) {
       //Internal its equal to concat function of javascript
       //return [...state, ...action.posts];
       return action.posts
+    case "PUBLIC_POST":
+      console.log(action)
+      return action.posts
     case 'ADD_COMMENT':
       var new_state = Object.assign([], state)
 

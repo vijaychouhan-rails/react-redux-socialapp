@@ -27,8 +27,10 @@ function handleRender(req,res) {
   
   match(routesMap, (err, redirectLocation, renderProps) => {
     if (err) {
+      console.log("=============error===========================")
       res.status(500).send("Could not fulfill this request. Please try again later.")
     } else if (redirectLocation) {
+      console.log("=============error1===========================")
       return res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
 
@@ -41,8 +43,31 @@ function handleRender(req,res) {
           console.log("Blank Status===================================")
           return <noscript />;
         } else {
-
-          fetch("http://localhost:3000/posts", {credentials: 'include'})
+          console.log("============cookies================")
+          var parseCookies = getCookie(cookies, ' authHeaders')
+          console.log(parseCookies)
+          var headers={}
+          if(parseCookies){
+            parseCookies = parseCookies.replace(/%22/g, "\"").replace(/%2C/g, ", ")
+            console.log("1 level")
+            console.log(parseCookies)
+            parseCookies = JSON.parse(parseCookies)
+            console.log(parseCookies)
+            headers['ACCESS_TOKEN'] = parseCookies["access-token"]
+            headers['AUTHORIZATION'] = ("Bearer " + parseCookies["access-token"])
+            headers['CLIENT'] = parseCookies["client"]
+            headers['EXPIRY'] = parseCookies["expiry"]
+            headers['UID'] = parseCookies["uid"]
+            headers['TOKEN_TYPE'] = parseCookies["token-type"]
+            headers['COOKIE'] = cookies
+            
+          }else{
+            console.log("No cookies found")
+          }
+          // console.log(cookies)
+          // console.log("parse")
+          // console.log(JSON.stringify(a))
+          fetch("http://localhost:3000/posts", {credentials: 'include', headers: headers})
             .then(function(response){
               return(response.json());
             })
@@ -70,10 +95,27 @@ function handleRender(req,res) {
       })
 
     } else {
+      console.log("=============error22222===========================")
       res.status(404).send('Not found')
     }
 
   })
+}
+
+// var getCookies = function(cookies){
+//   var pairs = cookies.split(";");
+//   var cookies = {};
+//   for (var i=0; i<pairs.length; i++){
+//     var pair = pairs[i].split("=");
+//     cookies[pair[0]] = unescape(pair[1]);
+//   }
+//   return cookies;
+// }
+
+function getCookie(cookies, name) {
+    function escape(s) { return s.replace(/([.*+?\^${}()|\[\]\/\\])/g, '\\$1'); };
+    var match = cookies.match(RegExp('(?:^|;\\s*)' + escape(name) + '=([^;]*)'));
+    return match ? match[1] : null;
 }
 
 function renderFullPage(component,initialState){
