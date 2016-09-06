@@ -13,6 +13,8 @@ https://www.startuprocket.com/articles/rails5-actioncable-redux-and-react-walkin
 
 https://github.com/BBB/dropzone-redux-form-example/blob/master/src/App.js
 
+#update state deep inside
+http://stackoverflow.com/questions/32135779/updating-nested-data-in-redux-store
 
 ==============
 
