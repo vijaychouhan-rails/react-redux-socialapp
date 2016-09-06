@@ -7,7 +7,7 @@ const PATHS = {
 };
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
   entry: [
 //    'webpack-hot-middleware/client',
     './src/index'
@@ -26,7 +26,7 @@ module.exports = {
     },
     {
         test: /\.css$/,
-        loader: 'style!css'
+        loader: 'style-loader!css-loader'
       },
     ]
   },
@@ -42,7 +42,10 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
     //global variable plugins
     new webpack.DefinePlugin({
-      API_URL: JSON.stringify("http://localhost:3000")
+      API_URL: JSON.stringify("http://localhost:3000"),
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
     })
   ]
 };
