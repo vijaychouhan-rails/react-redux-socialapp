@@ -26,3 +26,10 @@ body{
 .post-block img{
   box-shadow: 10px 10px 5px #888888;
 }
+
+          
+.width-150{
+  width: 150px !important;
+  border-radius: inherit;
+  box-shadow: 10px 10px 5px #888888;
+}

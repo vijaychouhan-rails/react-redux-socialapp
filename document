@@ -16,6 +16,9 @@ https://github.com/BBB/dropzone-redux-form-example/blob/master/src/App.js
 #update state deep inside
 http://stackoverflow.com/questions/32135779/updating-nested-data-in-redux-store
 
+#Api best way to call
+https://blog.tableflip.io/server-side-rendering-with-react-and-redux/
+
 ==============
 
 <input type="file" className="form-control" {...avatar} value={null} onChange={this.handleFile.bind(this, 'avatar')} />

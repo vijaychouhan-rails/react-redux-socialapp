@@ -44,8 +44,13 @@ function handleRender(req,res) {
           return <noscript />;
         } else {
           console.log("============cookies================")
-          var parseCookies = getCookie(cookies, ' authHeaders')
-          console.log(parseCookies)
+          try{
+            var parseCookies = getCookie(cookies, ' authHeaders')
+            console.log(parseCookies)
+          }
+          catch(err){
+            console.log(err.message)
+          }
           var headers={}
           if(parseCookies){
             parseCookies = parseCookies.replace(/%22/g, "\"").replace(/%2C/g, ", ")

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import CommentList from '../components/CommentList'
 import CommentForm from './CommentForm'
 
-export default class PostDetails extends React.Component {
+export class PostDetails extends React.Component {
   render() {
     const {id} = this.props.params;
     const post = (this.props.posts.filter((post) => (post.id.toString() === id)))[0]
