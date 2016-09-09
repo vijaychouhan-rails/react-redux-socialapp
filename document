@@ -19,6 +19,23 @@ http://stackoverflow.com/questions/32135779/updating-nested-data-in-redux-store
 #Api best way to call
 https://blog.tableflip.io/server-side-rendering-with-react-and-redux/
 
+https://github.com/bigardone/rails_and_redux
+
+http://stackoverflow.com/questions/34685072/react-redux-form-how-to-return-promise-from-onsubmit
+
+http://www.we-edit.de/stackoverflow/question/make-server-validation-using-redux-form-and-fetch-api-34142678.html
+https://github.com/erikras/redux-form/issues/291
+
+##Promise
+https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
+
+List of things
+http://ricostacruz.com/cheatsheets/awesome-redux.html
+
+Binding element:
+http://reactkungfu.com/2015/07/why-and-how-to-bind-methods-in-your-react-component-classes/
+
+https://medium.com/@rajaraodv/adding-a-robust-form-validation-to-react-redux-apps-616ca240c124
 ==============
 
 <input type="file" className="form-control" {...avatar} value={null} onChange={this.handleFile.bind(this, 'avatar')} />

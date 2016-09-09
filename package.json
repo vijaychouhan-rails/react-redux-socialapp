@@ -48,7 +48,7 @@
     "react-router-redux": "^4.0.5",
     "redux": "^3.5.2",
     "redux-auth": "0.0.5-beta5",
-    "redux-form": "^5.3.2",
+    "redux-form": "^6.0.2",
     "redux-immutable": "^3.0.7",
     "redux-immutablejs": "0.0.8",
     "redux-localstorage": "^0.4.1",

@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as Actions from '../actions';
 import Post from '../components/Post'
 import { Link } from 'react-router';
+import { push } from 'react-router-redux'
 
 class PostGrid extends React.Component {
   componentWillMount() {
@@ -11,12 +12,16 @@ class PostGrid extends React.Component {
 //      this.props.actions.fetchPosts()
   }
 
+  commentClick(post_id){
+    this.props.dispatch(push('/posts/'+post_id))
+  }
+
   render() {
     return (
       <div>
         <div><Link className="nav-link btn btn-primary" to="/posts/new">New Post</Link></div>
         {this.props.posts.map(function(post, index){
-          return <Post key={index} post={post}/>
+          return <Post key={index} post={post} onCommentClick={(post_id) => this.commentClick(post_id)}/>
         }, this)}
       </div>
     );

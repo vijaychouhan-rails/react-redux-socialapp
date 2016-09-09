@@ -1,6 +1,7 @@
 import { fetch } from 'redux-auth';
 import {reset} from 'redux-form';
 import { browserHistory } from 'react-router';
+import { stopSubmit } from 'redux-form';
 
 export function fetchPosts() {
   return function(dispatch){
@@ -23,7 +24,7 @@ export function fetchPosts() {
 }
 
 export function submitComment(data) {
-  return function(dispatch){
+  return function(dispatch) {
     const url = "http://localhost:3000/comments";
     fetch(url, {credentials: 'include', method: 'POST',
       headers: {
@@ -36,13 +37,16 @@ export function submitComment(data) {
         return(response.json());
       })
       .then(function(data){
-        
-        dispatch({
-          type: 'ADD_COMMENT',
-          comment: data
-        })
+        if(data.success){
+          dispatch({
+            type: 'ADD_COMMENT',
+            comment: data.data
+          })
 
-        dispatch(reset('comment'));
+          dispatch(reset('comment'));
+        }else{
+          dispatch(stopSubmit('comment', {comment: data.data}));
+        }
       })
       .catch(function(error){
         console.log("Opps...", "Could not fetch in fetchPosts " + error);

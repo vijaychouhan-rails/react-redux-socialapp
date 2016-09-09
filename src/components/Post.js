@@ -10,7 +10,7 @@ class Post extends React.Component {
         </Link>
         <p>
           <button className='btn width-150'> 100 <span className="glyphicon glyphicon-thumbs-up"></span></button>
-          <button className='btn width-150'> {this.props.post.comments.length} <span className='glyphicon glyphicon-comment'> </span></button>
+          <button className='btn width-150' onClick={() => this.props.onCommentClick(this.props.post.id)}> {this.props.post.comments.length} <span className='glyphicon glyphicon-comment'> </span></button>
         </p>
       </div>
     );

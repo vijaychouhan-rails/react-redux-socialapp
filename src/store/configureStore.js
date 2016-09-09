@@ -5,14 +5,19 @@ import createLogger from 'redux-logger';
 //Thunk middleware for Redux
 import reduxThunk from 'redux-thunk';
 
+import { browserHistory } from 'react-router'
+import { routerMiddleware, push } from 'react-router-redux'
+
 export default function configureStore(initialState) {
   const logger = createLogger();
+  
+  const middleware = routerMiddleware(browserHistory)
 
   const store = createStore(
     rootReducer,
     initialState,
     compose (
-      applyMiddleware(reduxThunk, logger),
+      applyMiddleware(reduxThunk, logger, middleware),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   );
