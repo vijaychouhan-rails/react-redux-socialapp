@@ -36,6 +36,9 @@ Binding element:
 http://reactkungfu.com/2015/07/why-and-how-to-bind-methods-in-your-react-component-classes/
 
 https://medium.com/@rajaraodv/adding-a-robust-form-validation-to-react-redux-apps-616ca240c124
+
+Redux-form6 with dropzone
+https://ollie.relph.me/blog/redux-form-and-dropzone-react-example/
 ==============
 
 <input type="file" className="form-control" {...avatar} value={null} onChange={this.handleFile.bind(this, 'avatar')} />

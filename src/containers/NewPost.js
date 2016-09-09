@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {reduxForm} from 'redux-form';
+import { Field, reduxForm } from 'redux-form'
 
 import * as Actions from '../actions';
 import { connect } from 'react-redux';
@@ -31,50 +31,89 @@ class NewPostForm extends Component {
   //   fields[fieldName].onChange(files)
   // }
   onOpenClick() {
-      this.refs.dropzone.open();
+    this.refs.dropzone.open();
+  }
+
+  renderField(field) {
+    console.log("===========Field============")
+    console.log(field)
+    if(field.inputType == 'textarea'){
+      return(
+        <div className={`input-row ${field.meta.touched && field.meta.error ? 'has-error' : 'test-errro'}`}>
+          <textarea {...field.input} type="textarea" className={`form-control ${field.className}`}/>
+          {field.meta.touched && field.meta.error && 
+           <span className="control-label">{field.meta.error}</span>}
+        </div>
+      )
     }
 
-  render() {
-    const {fields: {title, description, avatar}, handleSubmit, handleFile, onOpenClick,  submitting} = this.props;
-
-    
-    return (
-      
-      <form onSubmit={handleSubmit(this.handleSubmit)}>
-        <h2> New Post </h2>
-        <div className="form-group">
-          <label>Title: </label>
-          <input type="text" className="form-control" placeholder="First Name" {...title}/>
-        </div>
-        <div className="form-group">
-          <label>Description</label>
-          <textarea
-              {...description}
-              // required for reset form to work (only on textarea's)
-              // see: https://github.com/facebook/react/issues/2533
-              value={description.value || ''} className="form-control" />
-        </div>
-        
-        <div className="col-md-4">
-          <Dropzone ref="dropzone"
-            onDrop={ ( filesToUpload, e ) => avatar.onChange(filesToUpload)} multiple={false}
+    if(field.inputType=='fileUpload'){
+      const files = field.input.value;
+      return ( 
+        <div>
+          <Dropzone
+            name={field.name}
+            onDrop={( filesToUpload, e ) => field.input.onChange(filesToUpload)}
           >
+          <div>Try dropping some files here, or click to select files to upload.</div>
+          
           </Dropzone>
+          
+          {field.meta.touched &&
+            field.meta.error &&
+            <span className="error">{field.meta.error}</span>}
+          {files && Array.isArray(files) && (
+            <ul>
+              { files.map((file, i) => <img src={file.preview} height='200px' width='200px'/>) }
+            </ul>
+          )}
+
         </div>
-        
-        <div className='col-md-5' onClick={this.onOpenClick.bind(this)}>Try dropping some files here, or click to select files to upload.
-          { avatar && Array.isArray(avatar.value) && (
-            <div>
-              { avatar.value.map((file, i) => <img src={file.preview} height='200px'/>) }
+      )
+    }
+
+    return(
+      <div className={`input-row ${field.meta.touched && field.meta.error ? 'has-error' : 'test-errro'}`}>
+        <input {...field.input} type="text" className={`form-control ${field.className}`}/>
+        {field.meta.touched &&  field.meta.error && 
+         <span className="control-label">{field.meta.error}</span>}
+      </div>
+    )  
+  }
+
+  render() {
+    const { handleSubmit, handleFile, onOpenClick,  submitting} = this.props;
+   
+    return (
+      <div className='col-md-12'>
+        <div className='col-md-3'></div>
+        <div className='col-md-6'>
+          <form onSubmit={handleSubmit(this.handleSubmit)}>
+            <h2> New Post </h2>
+            <div className="form-group">
+              <label>Title: </label>
+              <Field name="title" component={this.renderField}/>
             </div>
-          ) }
+            <div className="form-group">
+              <label>Description</label>
+              <Field name="description" className='' component={this.renderField} inputType='textarea'/>
+            </div>
+
+            <div className="col-md-4">
+              <Field
+                name='avatar'
+                component={this.renderField} inputType='fileUpload'
+              />
+            </div>
+            
+            <div className='col-md-12'>
+              <button type="submit" disabled={submitting} className="btn btn-primary">
+                {submitting ? <i/> : <i/>} Submit
+              </button>
+            </div>
+          </form>
         </div>
-        <div className='row'>
-          <button type="submit" disabled={submitting} className="btn btn-primary">
-            {submitting ? <i/> : <i/>} Submit
-          </button>
-        </div>
-      </form>
+      </div>
     );
   }
 }
@@ -85,10 +124,9 @@ function mapStateToProps(state) {
   }
 }
 
-
 NewPostForm = reduxForm({ // <----- THIS IS THE IMPORTANT PART!
-  form: 'NewPostForm',                           // a unique name for this form
-  fields: ['title', 'description', 'avatar']
-}, mapStateToProps, Actions)(NewPostForm);
+  form: 'NewPostForm',
+  asyncValidating: true
+})(NewPostForm);
 
-export default NewPostForm;
+export default connect(mapStateToProps, Actions)(NewPostForm);
