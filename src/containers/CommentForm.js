@@ -46,7 +46,7 @@ class CommentForm extends Component {
         <div className={`input-row ${field.meta.touched && field.meta.error ? 'has-error' : 'test-errro'}`}>
           <input {...field.input} type="text" className={`form-control ${field.className}`}/>
           {field.meta.touched &&  field.meta.error && 
-           <span className="control-label">{field.m}eta.error}</span>}
+           <span className="control-label">{field.meta.error}</span>}
         </div>
       )  
     }

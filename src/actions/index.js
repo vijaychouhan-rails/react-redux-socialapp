@@ -67,6 +67,7 @@ export function submitPost(data) {
     });
       //body.append('avatar', data['avatar'][0]);
 
+    console.log("=========SUbmitting the post data============", body)
     const url = "http://localhost:3000/posts";
     fetch(url, {credentials: 'include', method: 'POST',
       headers: {
@@ -80,15 +81,19 @@ export function submitPost(data) {
         return(response.json());
       })
       .then(function(data){
-        console.log("submitPost============data=============")
-        console.log(data)
-        dispatch({
-          type: 'ADD_POST',
-          post: data
-        })
-
-        dispatch(reset('NewPostForm'));
-        browserHistory.push('/posts')
+        console.log("==============post create server response ===========", data)
+        if(data.success){
+          dispatch({
+            type: 'ADD_POST',
+            post: data
+          })
+          console.log("========================success======================")
+          dispatch(reset('NewPostForm'));
+          browserHistory.push('/posts')
+        }else{
+          console.log("=================++Error Message ==================  ", data)
+          dispatch(stopSubmit('NewPostForm', data));
+        }
       })
       .catch(function(error){
         console.log("Opps...", "Error in submitPost " + error);

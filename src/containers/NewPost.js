@@ -23,13 +23,6 @@ class NewPostForm extends Component {
     this.props.submitPost(data)
   }
 
-  // handleFile(fieldName, event) {
-  //   event.preventDefault();
-  //   const { fields } = this.props;
-  //   // convert files to an array
-  //   const files = [...event.target.files]
-  //   fields[fieldName].onChange(files)
-  // }
   onOpenClick() {
     this.refs.dropzone.open();
   }
@@ -82,12 +75,13 @@ class NewPostForm extends Component {
   }
 
   render() {
-    const { handleSubmit, handleFile, onOpenClick,  submitting} = this.props;
+    const { handleSubmit, handleFile, onOpenClick,  submitting, error} = this.props;
    
     return (
       <div className='col-md-12'>
         <div className='col-md-3'></div>
         <div className='col-md-6'>
+          {error && <strong>{error}</strong>}
           <form onSubmit={handleSubmit(this.handleSubmit)}>
             <h2> New Post </h2>
             <div className="form-group">
