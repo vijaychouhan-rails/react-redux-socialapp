@@ -70,7 +70,6 @@ export function submitPost(data) {
       //body.append('avatar', data['avatar'][0]);
     dispatch({ type: 'PAGE_LOADER' })
 
-    console.log("=========SUbmitting the post data============", body)
     const url = "http://localhost:3000/posts";
     fetch(url, {credentials: 'include', method: 'POST',
       headers: {
@@ -85,22 +84,49 @@ export function submitPost(data) {
         return(response.json());
       })
       .then(function(data){
-        console.log("==============post create server response ===========", data)
         if(data.success){
           dispatch({
             type: 'ADD_POST',
             post: data
           })
-          console.log("========================success======================")
           dispatch(reset('NewPostForm'));
           browserHistory.push('/posts')
         }else{
-          console.log("=================++Error Message ==================  ", data)
           dispatch(stopSubmit('NewPostForm', data));
         }
       })
       .catch(function(error){
         console.log("Opps...", "Error in submitPost " + error);
+      })
+  }
+}
+
+export function likeUnlikePost(post_id) {
+  return function(dispatch) {
+    dispatch({ type: 'PAGE_LOADER' })
+    const url = API_URL + ('/posts/' + post_id + '/post_like_unlike')
+    
+    fetch(url, {credentials: 'include', method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({})
+    })
+      .then(function(response){
+        dispatch({ type: 'STOP_PAGE_LOADER' })
+        return(response.json());
+      })
+      .then(function(data){
+        console.log("=======likeUnlikePost============================", data)
+        dispatch({
+          type: 'LIKE_UNLIKE_POST',
+          post: data
+        }) 
+
+      })
+      .catch(function(error){
+        console.log("Opps...", "Could not likeUnlikePost " + error);
       })
   }
 }

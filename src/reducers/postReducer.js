@@ -26,6 +26,16 @@ export default function postReducer(state = [], action) {
       var new_state = Object.assign([], state)
       new_state.push(action.post)
       return new_state
+
+    case 'LIKE_UNLIKE_POST':
+      var new_state = Object.assign([], state)
+      return new_state.map((post, index) => {
+        if (post.id === action.post.id) {
+          return action.post
+        }
+        return post
+      })
+
     default:
       return state;
   }

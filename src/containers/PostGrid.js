@@ -16,12 +16,16 @@ class PostGrid extends React.Component {
     this.props.dispatch(push('/posts/'+post_id))
   }
 
+  likeUnlikePost(post_id){
+    this.props.actions.likeUnlikePost(post_id)
+  }
+
   render() {
     return (
       <div>
         <div><Link className="nav-link btn btn-primary" to="/posts/new">New Post</Link></div>
         {this.props.posts.map(function(post, index){
-          return <Post key={index} post={post} onCommentClick={(post_id) => this.commentClick(post_id)}/>
+          return <Post key={index} post={post} onCommentClick={(post_id) => this.commentClick(post_id)} likeUnlikePost={(post_id) => this.likeUnlikePost(post_id) }/>
         }, this)}
       </div>
     );
