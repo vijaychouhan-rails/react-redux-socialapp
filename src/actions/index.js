@@ -25,6 +25,7 @@ export function fetchPosts() {
 
 export function submitComment(data) {
   return function(dispatch) {
+    dispatch({ type: 'PAGE_LOADER' })
     const url = "http://localhost:3000/comments";
     fetch(url, {credentials: 'include', method: 'POST',
       headers: {
@@ -34,6 +35,7 @@ export function submitComment(data) {
       body: JSON.stringify(data)
     })
       .then(function(response){
+        dispatch({ type: 'STOP_PAGE_LOADER' })
         return(response.json());
       })
       .then(function(data){
@@ -66,6 +68,7 @@ export function submitPost(data) {
       
     });
       //body.append('avatar', data['avatar'][0]);
+    dispatch({ type: 'PAGE_LOADER' })
 
     console.log("=========SUbmitting the post data============", body)
     const url = "http://localhost:3000/posts";
@@ -78,6 +81,7 @@ export function submitPost(data) {
       //body: JSON.stringify(data)
     })
       .then(function(response){
+        dispatch({ type: 'STOP_PAGE_LOADER' })
         return(response.json());
       })
       .then(function(data){

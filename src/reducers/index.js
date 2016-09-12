@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import PostReducer from './postReducer';
 import ErrorReducer from './errorReducer';
+import PageLoaderReducer from './pageLoader';
 import {authStateReducer} from "redux-auth";
 import { routerReducer } from 'react-router-redux'
 import Immutable from "immutable"
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   posts: PostReducer,
   auth: auth,
   form: formReducer,
-  errors: ErrorReducer
+  errors: ErrorReducer,
+  pageLoader: PageLoaderReducer
 });
 
 export default rootReducer;

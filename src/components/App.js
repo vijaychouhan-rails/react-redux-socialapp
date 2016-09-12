@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../containers/Header'
+import PageLoader from '../containers/PageLoader'
 import { AuthGlobals } from "redux-auth/bootstrap-theme";
 
 if (typeof window != 'undefined' && window.document) {
@@ -13,6 +14,7 @@ export default class App extends React.Component {
     console.log("END END END====================================================")
     return (
       <div>
+        <PageLoader />
         <AuthGlobals />
         <Header />
         <div className='container'>
