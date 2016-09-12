@@ -12,6 +12,8 @@ import thunkMiddleware from 'redux-thunk'
 import { configure } from "redux-auth";
 
 import qs from "query-string";
+import { browserHistory } from 'react-router';
+import Immutable from "immutable"
 
 function handleRender(req,res) {
   
@@ -24,7 +26,7 @@ function handleRender(req,res) {
     location: req.url
   }
 
-  
+  console.log("=================currentLocation==================", currentLocation)
   match(routesMap, (err, redirectLocation, renderProps) => {
     if (err) {
       console.log("=============error===========================")
@@ -37,7 +39,8 @@ function handleRender(req,res) {
       const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
       store.dispatch(configure(
-        {apiUrl: "http://localhost:3000", tokenValidationPath: "/auth/validate_token"}, {isServer: true, cookies: cookies, currentLocation: currentLocation}
+        // {apiUrl: "http://localhost:3000", tokenValidationPath: "/"}, {isServer: true, cookies: cookies, currentLocation: currentLocation}
+        {apiUrl: "http://localhost:3000", tokenValidationPath: "/"}, {isServer: true, currentLocation: currentLocation}
       )).then(({redirectPath, blank} = {}) => {
         if (blank) {
           console.log("Blank Status===================================")
@@ -72,7 +75,17 @@ function handleRender(req,res) {
           // console.log(cookies)
           // console.log("parse")
           // console.log(JSON.stringify(a))
-          fetch("http://localhost:3000/posts", {credentials: 'include', headers: headers})
+          console.log("======store.auth.user.isSignedIn=========")
+          //console.log("user",store.getState('auth'))
+          try{
+            
+          }catch(err){
+            console.log("Error=======================")
+            console.log(err.message)
+          }
+          console.log("======End store.auth.user.isSignedIn=========")
+          if(Immutable.fromJS(store.getState('auth')).get('auth').get('user').get("isSignedIn")){
+            fetch("http://localhost:3000/posts", {credentials: 'include', headers: headers})
             .then(function(response){
               return(response.json());
             })
@@ -96,6 +109,24 @@ function handleRender(req,res) {
             .catch(function(error){
               console.log("Opps...", "Could not fetch in fetchPosts " + error);
             })
+          }else{
+            console.log("===========User is not logged in==================")
+            // browserHistory.push('/login')
+            const body = renderToString(
+              <Provider store={store}>
+                <RouterContext {...renderProps} />
+              </Provider>
+            )
+
+            //store.dispatch({ type: 'POST_LIST', posts: data.posts })
+
+            const initialState = store.getState();
+            if(currentLocation=='/login'){
+              res.status(200).send(renderFullPage(body, initialState))
+            }else{
+              res.redirect('/login');
+            }
+          }
         }
       })
 
