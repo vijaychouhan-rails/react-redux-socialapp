@@ -39,6 +39,10 @@ https://medium.com/@rajaraodv/adding-a-robust-form-validation-to-react-redux-app
 
 Redux-form6 with dropzone
 https://ollie.relph.me/blog/redux-form-and-dropzone-react-example/
+
+
+- MUST READ
+https://medium.com/lexical-labs-engineering/redux-best-practices-64d59775802e
 ==============
 
 <input type="file" className="form-control" {...avatar} value={null} onChange={this.handleFile.bind(this, 'avatar')} />

@@ -130,3 +130,10 @@ export function likeUnlikePost(post_id) {
       })
   }
 }
+
+export function userLogout() {
+  return function(dispatch){
+    console.log("========userLogout=========Action===========")
+    dispatch({ type: 'USER_LOGOUT' })
+  }
+}

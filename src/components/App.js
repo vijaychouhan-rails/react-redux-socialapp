@@ -17,9 +17,6 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log("====================================================")
-    console.log((typeof window != 'undefined' && window.document))
-    console.log("END END END====================================================")
     return (
       <div>
         <PageLoader />

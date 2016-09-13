@@ -8,8 +8,10 @@ import { push } from 'react-router-redux'
 
 class PostGrid extends React.Component {
   componentWillMount() {
-      console.log("componentDidMount")
-//      this.props.actions.fetchPosts()
+    console.log("componentDidMount")
+    if(this.props.posts.length==0){
+      this.props.actions.fetchPosts()
+    }
   }
 
   commentClick(post_id){

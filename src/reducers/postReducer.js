@@ -36,6 +36,10 @@ export default function postReducer(state = [], action) {
         return post
       })
 
+    case 'USER_LOGOUT':
+      console.log("====================User Logoot testtest===============", state)
+      return []
+
     default:
       return state;
   }

@@ -30,7 +30,7 @@ console.log("============initialState=========")
 console.log(initialState)
 console.log("============End initialState=========")
 const store = configureStore(initialState);
-
+console.log("=====client side initialState======", initialState)
 // const history = syncHistoryWithStore(browserHistory, store)
 
 // client-side usage

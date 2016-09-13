@@ -20,7 +20,7 @@ class Header extends React.Component {
           <Link className="nav-link" to="/followers">Followers</Link>
         </li>,
         <li>
-          <SignOutButton next={() => browserHistory.push('/')} />
+          <SignOutButton next={() => this.props.dispatch({ type: 'USER_LOGOUT' }).then(browserHistory.push('/login')) } />
         </li>
       ]
     }

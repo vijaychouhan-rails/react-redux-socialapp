@@ -26,10 +26,8 @@ function handleRender(req,res) {
     location: req.url
   }
 
-  console.log("=================currentLocation==================", currentLocation)
   match(routesMap, (err, redirectLocation, renderProps) => {
     if (err) {
-      console.log("=============error===========================")
       res.status(500).send("Could not fulfill this request. Please try again later.")
     } else if (redirectLocation) {
       console.log("=============error1===========================")
@@ -42,10 +40,8 @@ function handleRender(req,res) {
         {apiUrl: "http://localhost:3000", tokenValidationPath: "/auth/validate_token"}, {isServer: true, cookies: cookies, currentLocation: currentLocation}
       )).then(({redirectPath, blank} = {}) => {
         if (blank) {
-          console.log("Blank Status===================================")
           return <noscript />;
         } else {
-          console.log("============cookies================")
           try{
             var parseCookies = getCookie(cookies, ' authHeaders')
             console.log(parseCookies)
@@ -104,10 +100,8 @@ function handleRender(req,res) {
                 <RouterContext {...renderProps} />
               </Provider>
             )
-
-            //store.dispatch({ type: 'POST_LIST', posts: data.posts })
-
             const initialState = store.getState();
+            
             if(currentLocation=='/login'){
               res.status(200).send(renderFullPage(body, initialState))
             }else{
