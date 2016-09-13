@@ -39,8 +39,7 @@ function handleRender(req,res) {
       const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
       store.dispatch(configure(
-        // {apiUrl: "http://localhost:3000", tokenValidationPath: "/"}, {isServer: true, cookies: cookies, currentLocation: currentLocation}
-        {apiUrl: "http://localhost:3000", tokenValidationPath: "/"}, {isServer: true, currentLocation: currentLocation}
+        {apiUrl: "http://localhost:3000", tokenValidationPath: "/auth/validate_token"}, {isServer: true, cookies: cookies, currentLocation: currentLocation}
       )).then(({redirectPath, blank} = {}) => {
         if (blank) {
           console.log("Blank Status===================================")
@@ -72,19 +71,7 @@ function handleRender(req,res) {
           }else{
             console.log("No cookies found")
           }
-          // console.log(cookies)
-          // console.log("parse")
-          // console.log(JSON.stringify(a))
-          console.log("======store.auth.user.isSignedIn=========")
-          //console.log("user",store.getState('auth'))
-          try{
-            
-          }catch(err){
-            console.log("Error=======================")
-            console.log(err.message)
-          }
-          console.log("======End store.auth.user.isSignedIn=========")
-          if(Immutable.fromJS(store.getState('auth')).get('auth').get('user').get("isSignedIn")){
+          if(Immutable.fromJS(store.getState()).getIn(['auth', 'user', 'isSignedIn'])){
             fetch("http://localhost:3000/posts", {credentials: 'include', headers: headers})
             .then(function(response){
               return(response.json());
