@@ -2,6 +2,11 @@ body{
   background-color: #f9f9f9;
 }
 
+ul.nav.navbar-nav.navbar-right li button {
+  padding-top: 15px;
+  text-decoration: none;
+}
+
 .post-block{
   margin-top: 30px;
   margin-bottom: 30px;
