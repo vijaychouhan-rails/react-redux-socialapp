@@ -10,11 +10,10 @@ if (typeof window != 'undefined' && window.document) {
 
 export default class App extends React.Component {
 
-  componentWillReceiveProps(nextProps) {
-    console.log("===========APP>JS===========================")
-    // replaceRoute("/login");
-    // browserHistory.push('/login')
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   replaceRoute("/login");
+  //   browserHistory.push('/login')
+  // }
 
   render() {
     return (

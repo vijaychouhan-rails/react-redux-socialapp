@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import * as Actions from '../actions';
 import { SignOutButton } from "redux-auth/bootstrap-theme";
+
 import { browserHistory } from 'react-router';
 
 class Header extends React.Component {
@@ -20,7 +21,9 @@ class Header extends React.Component {
           <Link className="nav-link" to="/followers">Followers</Link>
         </li>,
         <li>
-          <SignOutButton className="btn-link" next={() => this.props.dispatch({ type: 'USER_LOGOUT' }).then(browserHistory.push('/login')) } />
+          <SignOutButton className="btn-link" next={() => this.props.dispatch({ type: 'USER_LOGOUT' }).then(
+              this.props.dispatch({ type: 'HIDE_SIGN_OUT_SUCCESS_MODAL' }).then(browserHistory.push('/login')))
+               } />
         </li>
       ]
     }

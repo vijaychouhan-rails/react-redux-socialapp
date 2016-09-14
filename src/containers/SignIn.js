@@ -9,7 +9,7 @@ class SignIn extends React.Component {
     return (
       <div>
         <PageHeader>Sign In</PageHeader>
-        <EmailSignInForm next={() => browserHistory.push('/')} />
+        <EmailSignInForm next={() => this.props.dispatch({ type: 'HIDE_EMAIL_SIGN_IN_SUCCESS_MODAL' }).then(browserHistory.push('/')) } />
       </div>
     );
   }

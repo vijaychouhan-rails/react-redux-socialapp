@@ -10,7 +10,7 @@ var path = require('path')
 var Express = require('express')
 var requestHandler = require('./requestHandler')
 
-var qs = require("query-string")
+// var qs = require("query-string")
 var cookieParser = require('cookie-parser')
 
 var app = new Express()
