@@ -68,12 +68,12 @@ function handleRender(req,res) {
             console.log("No cookies found")
           }
           if(Immutable.fromJS(store.getState()).getIn(['auth', 'user', 'isSignedIn'])){
-            fetch("http://localhost:3000/posts", {credentials: 'include', headers: headers})
+            fetch("http://localhost:3000/public/feeds", {credentials: 'include', headers: headers})
             .then(function(response){
               return(response.json());
             })
             .then(function(data){
-
+              console.log("server side data", data)
               const { location, params, history } = renderProps
 
               const body = renderToString(
@@ -82,7 +82,7 @@ function handleRender(req,res) {
                 </Provider>
               )
 
-              store.dispatch({ type: 'POST_LIST', posts: data.posts })
+              store.dispatch({ type: 'FEED_LIST', feeds: data.feeds })
 
               const initialState = store.getState();
 

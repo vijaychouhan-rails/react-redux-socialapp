@@ -16,8 +16,6 @@ class CommentForm extends Component {
 
   handleSubmitForm(data, dispatch) {
     const { submitComment } = this.props.actions
-    console.log("tes test test============My test data==============", data)
-
     // Either use it
     // return new Promise((resolve, reject) => {
     //   // the ajax call would go here

@@ -15,6 +15,7 @@ class PostGrid extends React.Component {
   }
 
   commentClick(post_id){
+    console.log("comment and comment click", this.props)
     this.props.dispatch(push('/posts/'+post_id))
   }
 

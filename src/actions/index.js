@@ -2,6 +2,7 @@ import { fetch } from 'redux-auth';
 import {reset} from 'redux-form';
 import { browserHistory } from 'react-router';
 import { stopSubmit } from 'redux-form';
+import { push } from 'react-router-redux'
 
 export function fetchPosts() {
   return function(dispatch){
@@ -11,7 +12,7 @@ export function fetchPosts() {
         return(response.json());
       })
       .then(function(data){
-        console.log(data)
+        //console.log(data)
         dispatch({
           type: 'POST_LIST',
           posts: data.posts
@@ -42,6 +43,11 @@ export function submitComment(data) {
         if(data.success){
           dispatch({
             type: 'ADD_COMMENT',
+            comment: data.data
+          })
+
+          dispatch({
+            type: 'ADD_FEED_COMMENT',
             comment: data.data
           })
 

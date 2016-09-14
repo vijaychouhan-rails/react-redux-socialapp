@@ -1,23 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PostDetailPartial from '../components/PostDetailPartial'
-import * as Actions from '../actions/index';
+import * as Actions from '../actions/feeds';
 import { bindActionCreators } from 'redux';
 
-export class PostDetails extends React.Component {
+export class FeedDetails extends React.Component {
 
   componentWillMount() {
-    if(this.props.posts.length==0){
-      this.props.Actions.fetchFeeds()
+    if(this.props.feeds.length==0){
+      this.props.feedActions.fetchFeeds()
     }
   }
 
   render() {
     const {id} = this.props.params;
-    const post = (this.props.posts.filter((post) => (post.id.toString() === id)))[0]
-
+    const feed = (this.props.feeds.filter((feed) => (feed.id.toString() === id)))[0]
+    console.log("=============Feed is", feed)
     return (
-       <PostDetailPartial data={post} />
+      <PostDetailPartial data={feed} />
     );
   }
 }
@@ -25,7 +25,7 @@ export class PostDetails extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    posts: state.posts
+    feeds: state.feeds
   };
 }
 
@@ -35,4 +35,5 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostDetails);
+
+export default connect(mapStateToProps, mapDispatchToProps)(FeedDetails);

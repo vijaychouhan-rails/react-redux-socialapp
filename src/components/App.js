@@ -23,7 +23,7 @@ export default class App extends React.Component {
         <AuthGlobals />
         <Header />
         <div className='container'>
-          {(typeof window != 'undefined' && window.document) ? this.props.children : 'Loading...' }
+          {(typeof window != 'undefined' && window.document) ? React.cloneElement(this.props.children, this.props) : 'Loading...' }
         </div>
       </div>
     );
