@@ -37,6 +37,7 @@ export default function postReducer(state = [], action) {
       })
 
     case 'USER_LOGOUT':
+      console.log("===========USER_LOGOUT======================")
       return []
     default:
       return state;

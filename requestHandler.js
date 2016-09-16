@@ -102,7 +102,7 @@ function handleRender(req,res) {
             )
             const initialState = store.getState();
             
-            if(currentLocation=='/login'){
+            if(currentLocation=='/login' || currentLocation=='/signup'){
               res.status(200).send(renderFullPage(body, initialState))
             }else{
               res.redirect('/login');

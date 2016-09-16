@@ -1,6 +1,7 @@
 import rootReducer from '../reducers';
 import { createStore, compose, applyMiddleware } from 'redux';
 import createLogger from 'redux-logger';
+import authMiddleware from '../customMiddleware/authMiddleware';
 
 //Thunk middleware for Redux
 import reduxThunk from 'redux-thunk';
@@ -17,7 +18,7 @@ export default function configureStore(initialState) {
     rootReducer,
     initialState,
     compose (
-      applyMiddleware(reduxThunk, logger, middleware),
+      applyMiddleware(reduxThunk, logger, middleware, authMiddleware),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   );
