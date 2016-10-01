@@ -1,11 +1,18 @@
 import Immutable from "immutable"
-import { signOut } from "redux-auth";
+import { signOut, hideEmailSignInErrorModal } from "redux-auth";
+
 
 const authMiddleware = store => next => action => {
   if(action.type == "EMAIL_SIGN_UP_COMPLETE"){
     store.dispatch(signOut()).then(console.log("========SIGNOUT THEN BLOCK============")).catch(() => store.dispatch({type: 'HIDE_SIGN_OUT_ERROR_MODAL'}) );
     return next(action)
   }
+
+  //To hide the error popup on sign in page.
+  // if(action.type == "EMAIL_SIGN_IN_ERROR"){
+  //   store.dispatch(hideEmailSignInErrorModal()).then(console.log("========SIGNOUT THEN BLOCK============")).catch();
+  //   return next(action)
+  // }
   //if(action.type !== 'custom') return next(action)
   //do stuff!
   return next(action)
